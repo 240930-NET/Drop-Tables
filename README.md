@@ -15,4 +15,4 @@ Stretch goals:
 -  Gameification (Challenges, badges, popularity)
 -  Sub posts.
 
-![Team document (2)](https://github.com/user-attachments/assets/1cbee331-b809-4ac6-b1ce-8a108b4391dd)
+![Team document (3)](https://github.com/user-attachments/assets/f7e3b74c-df0c-4e35-a623-ef31a3a6e704)
