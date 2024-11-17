@@ -11,6 +11,6 @@ public class User
 	// name 
 	
 	// description or bio 
-	
+	// comments 
 	// might need to add more?
 }
