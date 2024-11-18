@@ -1,7 +1,13 @@
+using DropTablesSocial.Data;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+    // Add services to the container.
+builder.Services.AddDbContext<DropTablesContext>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DropTablesDb")));
+    
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
