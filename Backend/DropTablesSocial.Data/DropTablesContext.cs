@@ -12,15 +12,29 @@ public class DropTablesContext : DbContext{
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
 
         modelBuilder.Entity<User>()
-            .HasMany(p => p.Posts)
-            .WithMany(l => l.Likes)
+            .HasMany(u => u.Likes)
+            .WithMany(p => p.Likes)
             .UsingEntity<Dictionary<string, object>>(
-                "UserLikes", 
-                ul => ul.HasOne<User>().WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.Restrict),
-                ul => ul.HasOne<Post>().WithMany().HasForeignKey("PostId").OnDelete(DeleteBehavior.Restrict));
+                "UserLikes",
+                ul => ul.HasOne<Post>().WithMany().HasForeignKey("PostId").OnDelete(DeleteBehavior.Restrict),
+                ul => ul.HasOne<User>().WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.Restrict));
         
-        modelBuilder.Entity<Post>().HasOne<User>().WithMany().HasForeignKey("UserId");
+        modelBuilder.Entity<Post>()
+            .HasOne(p => p.User)
+            .WithMany(u => u.Posts)
+            .HasForeignKey(p => p.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Follow>().HasOne<User>().WithMany().HasForeignKey("UserId");
+        modelBuilder.Entity<Follow>()
+            .HasOne(f => f.Follower)
+            .WithMany(u => u.Following)
+            .HasForeignKey(f => f.FollowerId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Follow>()
+            .HasOne(f => f.User)
+            .WithMany(u => u.Followers)
+            .HasForeignKey(f => f.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
