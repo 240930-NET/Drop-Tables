@@ -8,7 +8,7 @@ WORKDIR /app
 COPY DropTablesSocial.API/ /app/DropTablesSocial.API
 COPY DropTablesSocial.Data/ /app/DropTablesSocial.Data
 COPY DropTablesSocial.Models/ /app/DropTablesSocial.Models 
-COPY DropTablesSocial.Tests/ /app/DropTablesSocial.Tests
+# COPY DropTablesSocial.Tests/ /app/DropTablesSocial.Tests
 
 # Restore dependencies for the API project
 RUN dotnet restore DropTablesSocial.API/DropTablesSocial.csproj
