@@ -4,11 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-    // Add services to the container.
+// Remove explicit Kestrel configuration
+// builder.WebHost.ConfigureKestrel(serverOptions =>
+// {
+//     serverOptions.ListenAnyIP(80);
+// });
+
+// Add services to the container.
 builder.Services.AddDbContext<DropTablesContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DropTablesDb")));
-    
-// Add services to the container.
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -40,17 +45,24 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger(); // Enable middleware to serve generated Swagger as a JSON endpoint.
+    app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "DropTables API V1");
         c.RoutePrefix = string.Empty; // Serve Swagger UI at the app's root
     });
 }
+else
+{
+    // Production configuration
+    app.UseExceptionHandler("/Error");
+}
 
-app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Add a simple health check endpoint
+app.MapGet("/", () => "all good 🙃");
 
 app.Run();
