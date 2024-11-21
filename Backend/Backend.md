@@ -3,4 +3,4 @@
   npm install
   npm run dev
 
-  # testing
+# general guide 

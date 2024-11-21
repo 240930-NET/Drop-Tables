@@ -1,5 +1,5 @@
 name: Build and deploy container app to Azure Web App - DropTables
-
+#adjusted
 # Define the events that will trigger this workflow
 on:
   push:
@@ -39,12 +39,18 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2  # Checkout code again for deployment step
 
+    - name: Check Secrets (Debug)
+      run: |
+        echo "Username: ${{ secrets.AzureAppService_ContainerUsername }}"
+        echo "Password: ${{ secrets.AzureAppService_ContainerPassword }}"
+
     - name: Log in to Docker Registry
       uses: docker/login-action@v2
       with:
         registry: https://index.docker.io/v1/
         username: ${{ secrets.AzureAppService_ContainerUsername }}  # Use a simplified secret reference
         password: ${{ secrets.AzureAppService_ContainerPassword }}
+
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
