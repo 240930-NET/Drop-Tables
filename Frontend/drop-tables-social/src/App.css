@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.content { 
+  margin: 50px auto; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+  border: 2px blue inset; 
+  border-radius: 0 25px;
+}
