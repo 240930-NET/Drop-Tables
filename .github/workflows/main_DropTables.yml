@@ -61,4 +61,4 @@ jobs:
         app-name: 'DropTables'  # Ensure this matches your Azure Web App name
         slot-name: 'production'  # Specify the deployment slot if applicable
         publish-profile: ${{ secrets.AzureAppService_PublishProfile }}  # Simplified secret reference
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername }}/koalacoder/droptables:0.0.3'
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername }}/droptables:0.0.3'
