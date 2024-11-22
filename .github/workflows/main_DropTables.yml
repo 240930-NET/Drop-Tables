@@ -7,12 +7,13 @@ on:
       - main  # Trigger on pushes to the main branch
     paths:
       - Backend/**  # Trigger only if there are changes in the Backend directory
+      - '!Frontend/**'  # Exclude changes in the Frontend directory from triggering this workflow
   pull_request:
     branches:
       - main  # Trigger on pull requests targeting the main branch
     paths:
       - Backend/**  # Trigger only if there are changes in the Backend directory
-  workflow_dispatch:
+      - '!Frontend/**'  # Exclude changes in the Frontend directory from triggering this workflow
 
 jobs:
   build:
