@@ -41,7 +41,7 @@ namespace DropTablesSocial.Data.Migrations
                         column: x => x.FolloweeId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Follows_Users_FollowerId",
                         column: x => x.FollowerId,
@@ -92,7 +92,7 @@ namespace DropTablesSocial.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

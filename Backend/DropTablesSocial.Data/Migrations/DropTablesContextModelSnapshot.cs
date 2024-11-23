@@ -118,7 +118,7 @@ namespace DropTablesSocial.Data.Migrations
                     b.HasOne("DropTablesSocial.Models.User", null)
                         .WithMany()
                         .HasForeignKey("FolloweeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DropTablesSocial.Models.User", null)
@@ -139,7 +139,7 @@ namespace DropTablesSocial.Data.Migrations
                     b.HasOne("DropTablesSocial.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 

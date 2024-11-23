@@ -15,7 +15,7 @@ public class DropTablesContext : DbContext{
             .WithMany(p => p.Likes)
             .UsingEntity<Dictionary<string, object>>(
                 "UserLikes",
-                ul => ul.HasOne<Post>().WithMany().HasForeignKey("PostId").OnDelete(DeleteBehavior.Cascade),
+                ul => ul.HasOne<Post>().WithMany().HasForeignKey("PostId").OnDelete(DeleteBehavior.Restrict),
                 ul => ul.HasOne<User>().WithMany().HasForeignKey("UserId").OnDelete(DeleteBehavior.Cascade))
                 .HasKey("UserId", "PostId");
         
@@ -24,7 +24,7 @@ public class DropTablesContext : DbContext{
             .WithMany(u => u.Following)
             .UsingEntity<Dictionary<string, object>>(
                 "Follows",
-                f => f.HasOne<User>().WithMany().HasForeignKey("FollowerId").OnDelete(DeleteBehavior.Cascade),
+                f => f.HasOne<User>().WithMany().HasForeignKey("FollowerId").OnDelete(DeleteBehavior.Restrict),
                 f => f.HasOne<User>().WithMany().HasForeignKey("FolloweeId").OnDelete(DeleteBehavior.Cascade))
                 .HasKey("FollowerId", "FolloweeId");
         

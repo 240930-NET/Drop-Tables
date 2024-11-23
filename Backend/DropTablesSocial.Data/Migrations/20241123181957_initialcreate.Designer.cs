@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DropTablesSocial.Data.Migrations
 {
     [DbContext(typeof(DropTablesContext))]
-    [Migration("20241123001216_initialcreate")]
+    [Migration("20241123181957_initialcreate")]
     partial class initialcreate
     {
         /// <inheritdoc />
@@ -121,7 +121,7 @@ namespace DropTablesSocial.Data.Migrations
                     b.HasOne("DropTablesSocial.Models.User", null)
                         .WithMany()
                         .HasForeignKey("FolloweeId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DropTablesSocial.Models.User", null)
@@ -142,7 +142,7 @@ namespace DropTablesSocial.Data.Migrations
                     b.HasOne("DropTablesSocial.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
