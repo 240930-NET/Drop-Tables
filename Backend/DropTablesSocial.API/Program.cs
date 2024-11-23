@@ -1,6 +1,8 @@
 using DropTablesSocial.Data;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using DropTablesSocial.API;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +14,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<DropTablesContext>(options => 
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DropTablesDb")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DropTablesDb"),
+    sqlOptions => sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddScoped<IUserRepo, UserRepo>();
+builder.Services.AddScoped<IPostRepo, PostRepo>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IPostService, PostService>();
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Configure Swagger
 builder.Services.AddSwaggerGen(options =>
