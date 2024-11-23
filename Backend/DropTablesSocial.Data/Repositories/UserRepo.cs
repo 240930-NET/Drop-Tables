@@ -43,4 +43,12 @@ public class UserRepo : IUserRepo {
         await _context.SaveChangesAsync();
     }
 
+    public async Task<User> GetUserByUsername(string Username) {
+        return await _context.Users
+            .Include(u => u.Posts)
+            .Include(u => u.Followers)
+            .Include(u => u.Following)
+            .Include(u => u.Likes)
+            .FirstOrDefaultAsync(u => u.Username == Username);
+    }
 }

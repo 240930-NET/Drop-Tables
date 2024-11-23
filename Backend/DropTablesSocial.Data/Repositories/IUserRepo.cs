@@ -8,4 +8,5 @@ public interface IUserRepo {
     public Task AddUser(User user);
     public Task UpdateUser(User user);
     public Task DeleteUser(User user);
+    public Task<User> GetUserByUsername(string Username);
 }

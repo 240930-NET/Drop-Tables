@@ -28,6 +28,7 @@ public class UserService : IUserService {
     }
 
     public async Task AddUser(AddUserDTO addUserDTO) {
+        if (await _userRepo.GetUserByUsername(addUserDTO.Username) is not null) throw new InvalidOperationException("User already exists");
         User user = _mapper.Map<User>(addUserDTO);
         await _userRepo.AddUser(user);
     }
@@ -79,5 +80,11 @@ public class UserService : IUserService {
 
         follower.Following.Remove(followee);
         await _userRepo.UpdateUser(follower);
+    }
+
+    public async Task<UserDTO> GetUserByUsername(string Username) {
+        User user = await _userRepo.GetUserByUsername(Username) ?? throw new NullReferenceException("No user found");
+        UserDTO userDTO = _mapper.Map<UserDTO>(user);
+        return userDTO;
     }
 }

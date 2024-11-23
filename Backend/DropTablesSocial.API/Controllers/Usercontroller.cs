@@ -110,4 +110,14 @@ public class UserController : ControllerBase{
             return BadRequest();
         }
     }
+
+    [HttpGet("login/{username}")]
+    public async Task<IActionResult> GetUserByUsername(string username) {
+        try {
+            return Ok(await _userService.GetUserByUsername(username));
+        }
+        catch {
+            return BadRequest();
+        }
+    }
 }

@@ -12,4 +12,5 @@ public interface IUserService {
     public Task UnLikePost(int userId, int postId);
     public Task FollowUser(int followerId, int followeeId);
     public Task UnFollowUser(int followerId, int followeeId);
+    public Task<UserDTO> GetUserByUsername(string Username);
 }
