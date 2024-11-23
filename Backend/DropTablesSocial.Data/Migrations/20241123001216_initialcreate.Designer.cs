@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DropTablesSocial.Data.Migrations
 {
     [DbContext(typeof(DropTablesContext))]
-    [Migration("20241118193423_Initial")]
-    partial class Initial
+    [Migration("20241123001216_initialcreate")]
+    partial class initialcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,29 +24,6 @@ namespace DropTablesSocial.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("DropTablesSocial.Models.Follow", b =>
-                {
-                    b.Property<int>("FollowId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FollowId"));
-
-                    b.Property<int>("FollowerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FollowId");
-
-                    b.HasIndex("FollowerId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Follows");
-                });
 
             modelBuilder.Entity("DropTablesSocial.Models.Post", b =>
                 {
@@ -98,38 +75,34 @@ namespace DropTablesSocial.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("UserLikes", b =>
+            modelBuilder.Entity("Follows", b =>
                 {
-                    b.Property<int>("PostId")
+                    b.Property<int>("FollowerId")
                         .HasColumnType("int");
 
+                    b.Property<int>("FolloweeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FollowerId", "FolloweeId");
+
+                    b.HasIndex("FolloweeId");
+
+                    b.ToTable("Follows");
+                });
+
+            modelBuilder.Entity("UserLikes", b =>
+                {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("PostId", "UserId");
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("UserId");
+                    b.HasKey("UserId", "PostId");
+
+                    b.HasIndex("PostId");
 
                     b.ToTable("UserLikes");
-                });
-
-            modelBuilder.Entity("DropTablesSocial.Models.Follow", b =>
-                {
-                    b.HasOne("DropTablesSocial.Models.User", "Follower")
-                        .WithMany("Following")
-                        .HasForeignKey("FollowerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("DropTablesSocial.Models.User", "User")
-                        .WithMany("Followers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Follower");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DropTablesSocial.Models.Post", b =>
@@ -141,6 +114,21 @@ namespace DropTablesSocial.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Follows", b =>
+                {
+                    b.HasOne("DropTablesSocial.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("FolloweeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("DropTablesSocial.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("FollowerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("UserLikes", b =>
@@ -160,10 +148,6 @@ namespace DropTablesSocial.Data.Migrations
 
             modelBuilder.Entity("DropTablesSocial.Models.User", b =>
                 {
-                    b.Navigation("Followers");
-
-                    b.Navigation("Following");
-
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618

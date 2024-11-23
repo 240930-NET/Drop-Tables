@@ -32,7 +32,7 @@ public class UserController : ControllerBase{
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUser([FromBody] User user) {
+    public async Task<IActionResult> AddUser([FromBody] AddUserDTO user) {
         try {
             await _userService.AddUser(user);
             return Created();
@@ -42,12 +42,12 @@ public class UserController : ControllerBase{
         }
     }
 
-    [HttpPut]
-    public IActionResult UpdateUser([FromBody] User user)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDTO user)
     {
         try
         {
-            _userService.UpdateUser(user);
+            await _userService.UpdateUser(id, user);
             return NoContent();
         }
         catch
@@ -57,9 +57,53 @@ public class UserController : ControllerBase{
     }
 
     [HttpDelete("{id}")]
-    public IActionResult DeleteUser(int id) {
+    public async Task<IActionResult> DeleteUser(int id) {
         try {
-            _userService.DeleteUser(id);
+            await _userService.DeleteUser(id);
+            return NoContent();
+        }
+        catch (Exception e){
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost("{id}/post/{postId}")]
+    public async Task<IActionResult> LikePost(int id, int postId) {
+        try {
+            await _userService.LikePost(id, postId);
+            return NoContent();
+        }
+        catch {
+            return BadRequest();
+        }
+    }
+
+    [HttpDelete("{id}/post/{postId}")]
+    public async Task<IActionResult> UnLikePost(int id, int postId) {
+        try {
+            await _userService.UnLikePost(id, postId);
+            return NoContent();
+        }
+        catch {
+            return BadRequest();
+        }
+    }
+
+    [HttpPost("{followerId}/user/{followeeId}")]
+    public async Task<IActionResult> FollowUser(int followerId, int followeeId) {
+        try {
+            await _userService.FollowUser(followerId, followeeId);
+            return NoContent();
+        }
+        catch {
+            return BadRequest();
+        }
+    }
+
+    [HttpDelete("{followerId}/user/{followeeId}")]
+    public async Task<IActionResult> UnfollowUser(int followerId, int followeeId) {
+        try {
+            await _userService.UnFollowUser(followerId, followeeId);
             return NoContent();
         }
         catch {
