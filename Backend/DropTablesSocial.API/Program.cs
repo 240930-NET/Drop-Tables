@@ -20,6 +20,14 @@ builder.Services.AddDbContext<DropTablesContext>(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAll", policy => {
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IPostRepo, PostRepo>();
 
@@ -69,6 +77,7 @@ else
     app.UseExceptionHandler("/Error");
 }
 
+app.UseCors("AllowAll");
 app.UseAuthorization();
 
 app.MapControllers();
