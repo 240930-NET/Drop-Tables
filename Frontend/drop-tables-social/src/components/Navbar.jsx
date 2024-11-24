@@ -53,4 +53,6 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default Navbar;                {/* The hamburger menu is used to toggle the menu on and off */}
+            {/* The sidebar is placed here, and is only visible when the menu is open */}
+
