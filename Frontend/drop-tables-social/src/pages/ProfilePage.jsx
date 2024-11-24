@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
-import Profile from "../newcomponents/Profile";
-import ProfileTab from "../newcomponents/ProfileTab";
-import PostTile from "../newcomponents/PostTile";
+import Profile from "../components/Profile";
+import ProfileTab from "../components/ProfileTab";
+import PostTile from "../components/PostTile";
 import { UserContext } from "../context/UserContext";
 
 const ProfilePage = () => {
