@@ -1,31 +1,56 @@
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "./Navbar.css";
+import "../styles/Navbar.css";
+import SideBar from "./SideBar.jsx";
 
 function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // Ensure it starts closed
+
+    const toggleMenu = () => {
+        setIsMenuOpen(prevState => !prevState); // Toggle the menu state
+    };
+
     return (
-        <nav>
-            <ul>
-                <li id="logo">
-                    <div className="bookIcon">
-                        <div className="bookLabel"/>
-                    </div>
-                    <NavLink to="/home">DROP TABLE</NavLink>
-                </li>
-                <li className="navButton">
-                    <NavLink to="/home">Home</NavLink>        
-                </li>
-                <li className="navButton">
-                    <NavLink to="/feed">Your Feed</NavLink>        
-                </li>
-                <li className="navButton">
-                    <NavLink to="/profile">Profile</NavLink>        
-                </li>
-            </ul>
-            
-        </nav>
-    )
-    
-    
+        <>
+            <nav>
+                <ul id="navList">
+                    <li id="logo">
+                        <div className="bookIcon">
+                            <div className="bookLabel" />
+                        </div>
+                        <NavLink id="dropTable" to="/home">DROP TABLE</NavLink>
+                    </li>
+                    <section id="navButtons">
+                        <li className="navButton">
+                            <NavLink to="/home">Home</NavLink>
+                        </li>
+                        <li className="navButton">
+                            <NavLink to="/feed">Your Feed</NavLink>
+                        </li>
+                        <li id="profileButton" className="navButton">
+                            <NavLink to="/profile">Profile</NavLink>
+                        </li>
+                    </section>
+                    <section id="avatarSection">
+                        <li>
+                            <img 
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDsP6mnBn3JUxcDsy8HkUz3QN2KMmrxScVtg&s" 
+                                alt="User Avatar" 
+                                id="avatar" 
+                            />
+                        </li>
+                    </section>
+                </ul>
+                <section id="hamburger" onClick={toggleMenu}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </section>
+            </nav>
+            {/* Sidebar should be placed here */}
+            <SideBar isOpen={isMenuOpen} />
+        </>
+    );
 }
 
 export default Navbar;
