@@ -1,19 +1,16 @@
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Profile = () => {
-    const user = {
-        Username: "fakeusername",
-        Posts: ["fake", "array"],
-        Followers: ["fake", "followers", "array"],
-        Following: ["fake", "following", "array"],
-    }
+    const { currentUser } = useContext(UserContext);
     return (
         <div className="profile-info">
-            <img className="profile-avatar" src={user.ProfileImageUrl} alt="User Avatar"/>
+            <img className="profile-avatar" src={currentUser?.profileImageUrl} alt="User Avatar"/>
             <div className="profile-details">
-                <h2>{user.Username}</h2>
-                <p>Posts: {user.Posts.length}</p>
-                <p>Followers: {user.Followers.length}</p>
-                <p>Following: {user.Following.length}</p>
+                <h2>{currentUser.username}</h2>
+                <p>Posts: {currentUser.posts?.length}</p>
+                <p>Followers: {currentUser.followers?.length}</p>
+                <p>Following: {currentUser.following?.length}</p>
             </div>
             <div className="profile-about">
                 <h3>About me:</h3>

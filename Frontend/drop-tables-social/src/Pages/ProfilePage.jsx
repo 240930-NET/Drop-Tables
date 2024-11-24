@@ -1,21 +1,18 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Profile from "../Components/Profile";
 import ProfileTab from "../Components/ProfileTab";
+import PostTile from "../components/PostTile";
+import { UserContext } from "../context/UserContext";
 
 const ProfilePage = () => {
     const [tab, setTab] = useState("posts");
+    const { currentUser } = useContext(UserContext);
 
     const handleTabChange = (selectedTab) => {
         setTab(selectedTab);
     }
 
-    const fakePosts = [
-        {
-            username: "fetch users username",
-            content: "fetch users posts content",
-            likes: "fetch posts likes"
-        }
-    ]
+    console.log(currentUser);
 
     return (
         <div className="profile-page">
@@ -23,12 +20,16 @@ const ProfilePage = () => {
             <Profile />
             <ProfileTab onTabChange={handleTabChange}/>
             <div className="profile-content">
-                {tab === "posts" && <p>map user posts here</p>
-                    // fakePosts.map((post, index) => (
-                    //     <PostTile key={index} {...post}/>
-                    // ))
+                {tab === "posts" &&
+                    currentUser?.posts?.map((post, index) => (
+                        <PostTile key={index} {...post}/>
+                    ))
                 }
-                {tab === "likes" && <p>map liked posts here</p>}
+                {tab === "likes" && 
+                    currentUser?.likes?.map((like, index) => (
+                        <PostTile key={index} {...like}/>
+                    ))    
+                }
             </div>
         </div>
     )
