@@ -13,7 +13,7 @@ import ProfilePage from './pages/ProfilePage.jsx';
 import Feed from './pages/Feed.jsx';
 import { UserProvider } from './context/UserContext.jsx';
 import LoginPage from './pages/LoginPage.jsx';
-import LoginRoute from './pages/LoginRoute.jsx';
+import LoginRoute from './LoginRoute.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 
 const router = createBrowserRouter([
