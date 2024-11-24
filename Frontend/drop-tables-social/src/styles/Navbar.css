@@ -105,3 +105,10 @@ li a:hover {
     background-color: white;
     margin: 6px 0;
 }
+
+@media screen and (max-width: 980px) {
+    #navButtons {
+        display: none;
+    }
+    
+}
