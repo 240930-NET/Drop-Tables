@@ -3,12 +3,19 @@ import { createRoot } from 'react-dom/client'
 import {createBrowserRouter,RouterProvider,} from "react-router-dom";
 
 import './index.css'
-import App from './App.jsx'
+import './Styles/Profile.css'
+import './Styles/ProfilePage.css'
+import './Styles/ProfileTab.css'
+import './Styles/AddPost.css'
 import ErrorPage from "./error-page";
 import Layout from './pages/Layout.jsx';
 import Home from './pages/Home.jsx';
-import Profile from './pages/Profile.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
 import Feed from './pages/Feed.jsx';
+import { UserProvider } from './context/UserContext.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+import LoginRoute from './LoginRoute.jsx';
+import RegisterPage from './pages/RegisterPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,22 +25,44 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home/",
-        element: <Home/>
+        element: (
+          <LoginRoute>
+            <Home/>
+          </LoginRoute>
+        )
       },
       {
         path: "profile/",
-        element: <Profile/>
+        element: (
+          <LoginRoute>
+            <ProfilePage/>
+          </LoginRoute>
+        )
       },
       {
         path: "feed/",
-        element: <Feed/>
+        element: (
+          <LoginRoute>
+            <Feed/>
+          </LoginRoute>
+        )
       },
+      {
+        path: "login",
+        element: <LoginPage/>
+      },
+      {
+        path: "register",
+        element: <RegisterPage />
+      }
     ]
   }
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </StrictMode>,
 )

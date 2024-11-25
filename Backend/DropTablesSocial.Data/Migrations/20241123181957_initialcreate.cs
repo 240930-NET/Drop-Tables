@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DropTablesSocial.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initialcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,23 +30,21 @@ namespace DropTablesSocial.Data.Migrations
                 name: "Follows",
                 columns: table => new
                 {
-                    FollowId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     FollowerId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    FolloweeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Follows", x => x.FollowId);
+                    table.PrimaryKey("PK_Follows", x => new { x.FollowerId, x.FolloweeId });
+                    table.ForeignKey(
+                        name: "FK_Follows_Users_FolloweeId",
+                        column: x => x.FolloweeId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Follows_Users_FollowerId",
                         column: x => x.FollowerId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Follows_Users_UserId",
-                        column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
@@ -77,12 +75,12 @@ namespace DropTablesSocial.Data.Migrations
                 name: "UserLikes",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    PostId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserLikes", x => new { x.PostId, x.UserId });
+                    table.PrimaryKey("PK_UserLikes", x => new { x.UserId, x.PostId });
                     table.ForeignKey(
                         name: "FK_UserLikes_Posts_PostId",
                         column: x => x.PostId,
@@ -94,18 +92,13 @@ namespace DropTablesSocial.Data.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Follows_FollowerId",
+                name: "IX_Follows_FolloweeId",
                 table: "Follows",
-                column: "FollowerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Follows_UserId",
-                table: "Follows",
-                column: "UserId");
+                column: "FolloweeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_UserId",
@@ -113,9 +106,9 @@ namespace DropTablesSocial.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserLikes_UserId",
+                name: "IX_UserLikes_PostId",
                 table: "UserLikes",
-                column: "UserId");
+                column: "PostId");
         }
 
         /// <inheritdoc />
