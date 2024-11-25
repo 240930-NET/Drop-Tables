@@ -6,6 +6,7 @@ import './index.css'
 import './Styles/Profile.css'
 import './Styles/ProfilePage.css'
 import './Styles/ProfileTab.css'
+import './Styles/AddPost.css'
 import ErrorPage from "./error-page";
 import Layout from './pages/Layout.jsx';
 import Home from './pages/Home.jsx';

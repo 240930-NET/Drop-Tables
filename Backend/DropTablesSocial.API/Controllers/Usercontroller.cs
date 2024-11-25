@@ -106,8 +106,8 @@ public class UserController : ControllerBase{
             await _userService.UnFollowUser(followerId, followeeId);
             return NoContent();
         }
-        catch {
-            return BadRequest();
+        catch (Exception e){
+            return BadRequest(e.Message);
         }
     }
 

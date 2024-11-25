@@ -16,7 +16,6 @@ const ProfilePage = () => {
 
     return (
         <div className="profile-page">
-            {/* Insert header component here */}
             <Profile />
             <ProfileTab onTabChange={handleTabChange}/>
             <div className="profile-content">

@@ -2,15 +2,21 @@ import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/Navbar.css";
 import SideBar from "./SideBar.jsx";
+import AddPostPopup from "./AddPostPopup.jsx";
 import { UserContext } from "../context/UserContext.jsx";
 
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Ensure it starts closed
+    const [ postMenuOpen, setPostMenuOpen ] = useState(false);
     const { logout } = useContext(UserContext);
 
     const toggleMenu = () => {
         setIsMenuOpen(prevState => !prevState); // Toggle the menu state
     };
+
+    const togglePostAdd = () => {
+        setPostMenuOpen(prevState => !prevState);
+    }
 
     return (
         <>
@@ -38,7 +44,7 @@ function Navbar() {
                             <button onClick={logout}>Logout</button>
                         </li>
                         <li>
-                            <img 
+                            <img onClick={togglePostAdd}
                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDsP6mnBn3JUxcDsy8HkUz3QN2KMmrxScVtg&s" 
                                 alt="User Avatar" 
                                 id="avatar" 
@@ -54,6 +60,9 @@ function Navbar() {
             </nav>
             {/* Sidebar should be placed here */}
             <SideBar isOpen={isMenuOpen} />
+            {postMenuOpen && (
+                <AddPostPopup isOpen={postMenuOpen} onClose={() => setPostMenuOpen(false)} />
+            )}
         </>
     );
 }
