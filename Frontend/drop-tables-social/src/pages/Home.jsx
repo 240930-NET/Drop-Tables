@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Post from '../components/Post.jsx';
+// import Post from '../components/Post.jsx';
 import '../styles/Home.css'
 
 function Home(){
@@ -47,7 +47,8 @@ function Home(){
                     return(
                         <div key={post.postId}>
                         {user ?(
-                                <Post   content ={post.content} createdAt = {post.createdAt} username ={user.username} profilePicture={user.profileImageUrl}/>
+                                <p>Uncomment when post is added</p>
+                                // <Post   content ={post.content} createdAt = {post.createdAt} username ={user.username} profilePicture={user.profileImageUrl}/>
                         ) : (
                             <p>Loading post...</p> 
                           )}
