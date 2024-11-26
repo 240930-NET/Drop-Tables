@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { getUserLogin } from "../functions/user";
 
 export const UserContext = createContext();
 
@@ -18,8 +19,15 @@ export const UserProvider = ({ children }) => {
         localStorage.removeItem("currentUser");
     }
 
+    const handleChange = async () => {
+        if (currentUser) {
+            login(await getUserLogin(currentUser.username));
+            console.log(await getUserLogin(currentUser.username))
+        }
+    }
+
     return (
-        <UserContext.Provider value={{ currentUser, login, logout }}>
+        <UserContext.Provider value={{ currentUser, login, logout, handleChange }}>
             {children}
         </UserContext.Provider>
     )
