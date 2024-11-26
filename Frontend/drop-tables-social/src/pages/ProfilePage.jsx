@@ -3,7 +3,7 @@ import Profile from "../components/Profile";
 import ProfileTab from "../components/ProfileTab";
 import PostTile from "../components/PostTile";
 import { UserContext } from "../context/UserContext";
-
+import "../Styles/ProfilePage.css"
 const ProfilePage = () => {
     const [tab, setTab] = useState("posts");
     const { currentUser } = useContext(UserContext);

@@ -7,13 +7,16 @@ import './Styles/Profile.css'
 import './Styles/ProfilePage.css'
 import './Styles/ProfileTab.css'
 import './Styles/AddPost.css'
+import "./styles/Navbar.css";
+import "./Styles/LoginPage.css";
+import "./Styles/RegisterPage.css";
 import ErrorPage from "./error-page";
 import Layout from './pages/Layout.jsx';
 import Home from './pages/Home.jsx';
-import ProfilePage from './pages/ProfilePage.jsx';
+import ProfilePage from './Pages/ProfilePage.jsx';
 import Feed from './pages/Feed.jsx';
 import { UserProvider } from './context/UserContext.jsx';
-import LoginPage from './pages/LoginPage.jsx';
+import LoginPage from './Pages/LoginPage.jsx';
 import LoginRoute from './LoginRoute.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 
