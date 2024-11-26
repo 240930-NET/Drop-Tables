@@ -16,21 +16,33 @@ const LoginPage = () => {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                />
-                <button type="submit">Login</button>
-            </form>
-            <div>
-                <a href="/register">Register Here</a>
+        <>
+            <div className="container">
+
+
+                <div className="login-page">
+                    <h1>Login</h1>
+                    <form onSubmit={handleLogin}>
+                        <div className="loginCol">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
+                            <button className="login-button" type="submit">Login</button>
+                        </div>
+                    </form>
+
+                    <h3>Don't have an account?</h3>
+                    <div>
+                        <button className="login-button">
+                        <a href="/register">Register Here</a>
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

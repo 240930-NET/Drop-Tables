@@ -4,10 +4,12 @@ import { createPost } from "../functions/post";
 
 const AddPostPopup = ({ isOpen, onClose }) => {
     const [ postContent, setPostContent ] = useState("");
-    const { currentUser } = useContext(UserContext);
+    const { currentUser, handleChange } = useContext(UserContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        await createPost(currentUser.userId, postContent);
+        handleChange();
         onClose();
     }
 

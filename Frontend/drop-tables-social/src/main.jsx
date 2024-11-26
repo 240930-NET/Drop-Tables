@@ -7,6 +7,9 @@ import './Styles/Profile.css'
 import './Styles/ProfilePage.css'
 import './Styles/ProfileTab.css'
 import './Styles/AddPost.css'
+import "./styles/Navbar.css";
+import "./Styles/LoginPage.css";
+import "./Styles/RegisterPage.css";
 import ErrorPage from "./error-page";
 import Layout from './pages/Layout.jsx';
 import Home from './pages/Home.jsx';

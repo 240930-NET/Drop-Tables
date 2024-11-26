@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../styles/Navbar.css";
 import SideBar from "./SideBar.jsx";
 import AddPostPopup from "./AddPostPopup.jsx";
 import { UserContext } from "../context/UserContext.jsx";
@@ -8,7 +7,7 @@ import { UserContext } from "../context/UserContext.jsx";
 function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false); // Ensure it starts closed
     const [ postMenuOpen, setPostMenuOpen ] = useState(false);
-    const { logout } = useContext(UserContext);
+    const { logout, currentUser } = useContext(UserContext);
 
     const toggleMenu = () => {
         setIsMenuOpen(prevState => !prevState); // Toggle the menu state
@@ -45,7 +44,7 @@ function Navbar() {
                         </li>
                         <li>
                             <img onClick={togglePostAdd}
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDsP6mnBn3JUxcDsy8HkUz3QN2KMmrxScVtg&s" 
+                                src={currentUser?.profileImageUrl} 
                                 alt="User Avatar" 
                                 id="avatar" 
                             />
