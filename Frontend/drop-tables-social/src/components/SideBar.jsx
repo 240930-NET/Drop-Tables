@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import '../styles/SideBar.css';
-
+// A
 export default function SideBar({ isOpen }) {
     return (
         <section className={`sidebar ${isOpen ? 'open' : ''}`}>
