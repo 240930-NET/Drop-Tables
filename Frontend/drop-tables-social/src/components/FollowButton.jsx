@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
 export default function FollowButton({userId}){
-    const { currentUser } = useContext(UserContext);
+    const { currentUser, handleChange } = useContext(UserContext);
 
     const handleClick = async () => {
         try{
@@ -11,6 +11,7 @@ export default function FollowButton({userId}){
                 method: "POST"
             });
             console.log(response);
+            handleChange();
         }
         catch (error){
             console.log(error.message);
