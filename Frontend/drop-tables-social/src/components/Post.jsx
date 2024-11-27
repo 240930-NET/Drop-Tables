@@ -1,22 +1,27 @@
 import FollowButton from "./FollowButton";
+import UnfollowButton from "./UnfollowButton";
 import LikeButton from "./LikeButton";
+import DislikeButton from "./DislikeButton";
 import './Post.css';
 
-export default function Post({content, username, profilePicture}){
+export default function Post({postId, user, content}){
+
     return(
         <div className="post">
             <h3 className="post-header">
                 <div className="post-user-info">
-                    <p>{username}</p>
-                    <img src={profilePicture}></img>
+                    <p>{user.username}</p>
+                    <img src={user.profileImageUrl}></img>
                 </div>
-                <FollowButton/>
+                <UnfollowButton userId = {user.userId}/>
+                <FollowButton userId = {user.userId}/>
             </h3>
             <div className="post-content">
                 <h2>{content}</h2>
             </div>
             <div className="post-interactions">
-                <LikeButton/>
+                <DislikeButton postId = {postId}/>
+                <LikeButton postId = {postId}/>
                 <div className="heart"></div>
             </div>
         </div>

@@ -1,12 +1,10 @@
-import { useEffect, useState, useContext } from 'react';
-import { UserContext } from "../context/UserContext";
+import { useEffect, useState } from 'react';
 import Post from '../components/Post.jsx';
 
-function PostPopulator({page}){
+function PostPopulator(){
     const[posts, setPosts] = useState([]);
     const[loaded, setLoaded] = useState(5);
     const[users, setUsers] = useState({});
-    const { currentUser } = useContext(UserContext);
     function loadMorePosts()
     {
         setLoaded(loaded + 10);
@@ -45,10 +43,11 @@ function PostPopulator({page}){
                 {posts.slice(0, loaded).map(post => 
                 {
                     const user = users[post.userId];
+
                     return(
                         <div key={post.postId}>
                         {user ?(
-                                <Post content ={post.content} username ={user.username} profilePicture={user.profileImageUrl}/>
+                                <Post postId = {post.postId} user = {user} content ={post.content}/>
                         ) : (
                             <p>Loading post...</p> 
                           )}
