@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { createUser, getUserLogin } from "../functions/user";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 const RegisterPage = () => {
     const { login } = useContext(UserContext);
@@ -81,7 +81,7 @@ const RegisterPage = () => {
                         <button type="submit">Register</button>
                         <p>Ready to login?</p>
                         <button>
-                            <a href="/login" className="login-link">Login here</a>
+                            <NavLink to="/login">Login Here</NavLink>
                         </button>
                     </div>
                 </form>

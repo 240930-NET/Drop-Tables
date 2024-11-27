@@ -3,16 +3,28 @@ nav {
     font-family: "Lilita One", serif;
     font-weight: 400;
     font-style: normal;
+    margin: 0;
+    padding: 10px;
+    background-color: #0F2043;
+    display: flex;
+    justify-content:space-around;
 }
 
 #navList {
     list-style-type: none;
-    margin: 0;
-    padding: 40px;
-    background-color: #0F2043;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content:space-around;
+    margin-inline: auto;
+}
+
+li {
+    float: right;
+
+}
+
+#navButtonsItem{
+    float:left;
 }
 
 li a {
@@ -27,7 +39,6 @@ li a {
 
 #navButtons {
     gap: 20px;
-    display: flex;
     align-items: center;
 }
 
@@ -44,17 +55,25 @@ li a:hover {
     color: #020d22;
 }
 
-
-
-
 .navButton a.active {
     background-color: #96C3FF;
     color: white;
 }
 
+#navButtons ul {
+    display: block;
+    list-style-type: none;
+}
+
+#navButtons ul li {
+    float: left;
+    margin-inline: 10px;
+}
+
 #logo {
     display: flex;
-    align-items: center;
+    align-items: left;
+    float: left;
 }
 
 #logo a {
@@ -85,6 +104,7 @@ li a:hover {
 #avatarSection {
     display: flex;
     align-items: center;
+    margin-right: 25px;
 }
 
 /* Removed the @keyframes hoverLi as it's no longer used */
@@ -93,10 +113,13 @@ li a:hover {
     /* Always display the hamburger */
     flex-direction: column;
     cursor: pointer;
-    position: absolute;
     left: 5%;
     bottom: 5%;
     z-index: 1000;
+    padding-left: 30px;
+    padding-right: 20px;
+    float: left;
+    padding-top: 35px;
 }
 
 #hamburger span {
