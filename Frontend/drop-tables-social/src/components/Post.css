@@ -22,7 +22,7 @@
 .post-content {
     display: flex;
     padding: 20px;
-    justify-content: center;
+    justify-content:flex-start
 }
 .post-interactions {
     display: flex;
