@@ -4,6 +4,7 @@ using DropTablesSocial.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DropTablesSocial.Data.Migrations
 {
     [DbContext(typeof(DropTablesContext))]
-    partial class DropTablesContextModelSnapshot : ModelSnapshot
+    [Migration("20241127011043_ReconnectHosted")]
+    partial class ReconnectHosted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
