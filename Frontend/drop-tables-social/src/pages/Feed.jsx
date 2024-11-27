@@ -26,7 +26,6 @@ function Feed() {
 
   return (
     <div>
-      <h1>Feed</h1>
         {posts.map((post) => {
           const user = users?.find((u) => u.userId === post.userId);
           return user ? (
