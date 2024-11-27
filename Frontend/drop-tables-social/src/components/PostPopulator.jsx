@@ -11,9 +11,13 @@ function PostPopulator(){
     }
     useEffect(() => {
         async function loadPosts()  {
-        fetch("http://localhost:5001/api/Post")
-        .then(response => response.json())
-        .then(data => setPosts(data))
+          try {
+            fetch("http://localhost:5001/api/Post")
+          .then(response => response.json())
+          .then(data => setPosts(data))
+          } catch {
+            setPosts([])
+          }
       };
       loadPosts();}
       , []);
@@ -40,7 +44,7 @@ function PostPopulator(){
     return (
         <div>
             <div id="post-list">
-                {posts.slice(0, loaded).map(post => 
+                {posts?.slice(0, loaded).map(post => 
                 {
                     const user = users[post.userId];
 
