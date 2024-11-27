@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
-export default function LikeButton({postId}){
+export default function LikeButton({postId, onChange}){
     const { currentUser, handleChange } = useContext(UserContext);
 
     const handleClick = async () => {
@@ -12,6 +12,7 @@ export default function LikeButton({postId}){
             });
             console.log(response);
             handleChange();
+            onChange();
         }
         catch (error){
             console.log(error.message);
