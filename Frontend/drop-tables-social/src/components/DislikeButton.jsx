@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 
-export default function DislikeButton({postId}){
+export default function DislikeButton({postId, onChange}){
     const { currentUser, handleChange } = useContext(UserContext);
 
     const handleClick = async () => {
@@ -12,6 +12,7 @@ export default function DislikeButton({postId}){
             });
             console.log(response);
             handleChange();
+            onChange();
         }
         catch (error){
             console.log(error.message);

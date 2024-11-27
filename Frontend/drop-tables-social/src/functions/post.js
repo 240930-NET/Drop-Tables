@@ -36,3 +36,14 @@ export const getPosts = async (userIds) => {
         return null;
     }
 }
+
+export const getPost = async (postId) => {
+    try {
+        const response = await fetch(`${url}${postId}`);
+        if (!response.ok) throw new Error();
+        return response.json();
+    } catch {
+        console.error("Error Getting Post");
+        return null;
+    }
+}
